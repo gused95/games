@@ -9,8 +9,8 @@ function Navbar() {
         <button>Home</button>
       </Link>
 
-      <Link to="/about">
-        <button>About</button>
+      <Link to="/games/add">
+        <button>Add game</button>
       </Link>      
     </nav>
   );
