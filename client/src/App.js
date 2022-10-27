@@ -4,9 +4,10 @@ import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import AddGame from './pages/AddGame/AddGame';
 
 import { Routes, Route, Link } from "react-router-dom";
+import AllGames from './pages/AllGames/AllGames';
+import AddNewGame from './pages/AddNewGame/AddNewGame';
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
       <Navbar />
       
       <Routes>
-        <Route  path="/" element={<HomePage />} />
+        <Route  path="/" element={<AllGames />} />
 
-        <Route path="/games/add" element={<AddGame />} />
+        <Route path="/games/add" element={<AddNewGame />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>      
