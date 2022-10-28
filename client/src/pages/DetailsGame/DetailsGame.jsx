@@ -25,6 +25,16 @@ const DetailsGame = () => {
         .catch((err) => console.log(err));
     }, []); //  <-- This effect will run only once, after the initial render
 
+    const deleteGame = () => {
+        service.delGame(id)
+        .then(() => {
+            // Once the delete request is resolved successfully
+            // navigate back to the list of Games.
+            navigate("/");
+          })
+        .catch((err) => console.log(err));
+    }
+
   return (
     <Box 
         component="div" 
@@ -41,7 +51,10 @@ const DetailsGame = () => {
         </Typography>
         {game && (
             <>
-                <DetailsCard {...game}/>          
+                <DetailsCard 
+                    {...game}
+                    deleteGame={deleteGame}
+                />          
             </>
         )}
     </Box>

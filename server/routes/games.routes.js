@@ -30,6 +30,17 @@ router.get("/games/:id", (req, res, next) => {
   });
 
 
+// DELETE "http://localhost:5005/api/games/:id" => Route to delete a specific game
+router.delete("/games/:id", (req, res, next) => {
+    
+    const {id} = req.params;
+
+    Game.findByIdAndDelete(id)
+      .then(gameFromDB => res.status(200).json(gameFromDB))
+      .catch(err => next(err));
+  });
+
+
 // POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
 router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
     // console.log("file is: ", req.file)

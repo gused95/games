@@ -38,6 +38,7 @@ export default function DetailsCard(props) {
     consoles, 
     developer,
     imageUrl,
+    deleteGame,
     _id } = props;
 
     // Traslate active value to a string
@@ -130,7 +131,7 @@ export default function DetailsCard(props) {
         </Button>
         <Button 
           variant='contained'
-          // onClick={deleteCollection}
+          onClick={deleteGame}
           color='error'
         >
           <Link to="/myCollection" style={linkStyle} >

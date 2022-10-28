@@ -36,9 +36,16 @@ const createGame = (newGame) => {
     .catch(errorHandler);
 };
 
+const delGame = (id) => {
+  return api.delete(`/games/${id}`)
+    .then(res => res.data)
+    .catch(errorHandler);
+};
+
 export default {
   getGames,
   uploadImage,
   createGame,
+  delGame,
   getGame
 };
