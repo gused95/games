@@ -3,7 +3,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ export default function ObjectCard(props) {
     
     const linkStyle = {
       textDecoration: 'none',
-      color: 'white'
+      color: 'black',
   }
 
   return (
@@ -26,24 +25,18 @@ export default function ObjectCard(props) {
         component="img"
         height="140"
         image={props?.imageUrl}
-        alt="green iguana"
+        alt="game image"
       />
       <CardContent>
         
-        <Typography gutterBottom variant="h5" component="div">
-          {name}
-        </Typography>
-        <Typography gutterBottom variant="h6" component="div">
-          {}
-        </Typography>
-
-        <Typography variant="body2" color="text.primary">
-        {description}
-        </Typography>
-
+          <Typography gutterBottom variant="h6" component="div">
+            <Link to={`/games/${_id}`} style={linkStyle}>
+              {name}
+            </Link>
+          </Typography>
+        
       </CardContent>
       <CardActions>
-        {/* <Button size="small" variant='contained'><Link to={`/myCollection/${_id}` } style={linkStyle}>Detalles</Link></Button> */}
       </CardActions>
     </Card>
   );

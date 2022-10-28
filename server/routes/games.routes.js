@@ -19,6 +19,17 @@ router.get("/games", (req, res, next) => {
       .catch(err => next(err));
   });
 
+// GET "http://localhost:5005/api/games/:id" => Route to get a specific game
+router.get("/games/:id", (req, res, next) => {
+    
+    const {id} = req.params;
+
+    Game.findById(id)
+      .then(gameFromDB => res.status(200).json(gameFromDB))
+      .catch(err => next(err));
+  });
+
+
 // POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
 router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
     // console.log("file is: ", req.file)
@@ -35,7 +46,6 @@ router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
   });
 
 
-
 // POST 'http://localhost:5005/api/games' => for saving a new movie in the database
 router.post("/games", (req,res) => {
 
@@ -45,6 +55,7 @@ router.post("/games", (req,res) => {
         developer,
         consoles,
         imageUrl,
+        year,
         active } = req.body;
 
     if (!name || 
@@ -52,6 +63,7 @@ router.post("/games", (req,res) => {
         !developer || 
         !consoles || 
         !imageUrl || 
+        !year || 
         !active
         ) {
         return res
@@ -67,6 +79,7 @@ router.post("/games", (req,res) => {
             consoles,
             imageUrl,
             active,
+            year,
         }
     )
 

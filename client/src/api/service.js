@@ -18,6 +18,12 @@ const getGames = () => {
     .catch(errorHandler);
 };
 
+const getGame = (id) => {
+  return api.get(`/games/${id}`)
+    .then((res) => res.data)
+    .catch(errorHandler);
+};
+
 const uploadImage = (file) => {
   return api.post("/upload", file)
     .then(res => res.data)
@@ -33,5 +39,6 @@ const createGame = (newGame) => {
 export default {
   getGames,
   uploadImage,
-  createGame
+  createGame,
+  getGame
 };

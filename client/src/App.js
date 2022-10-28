@@ -8,6 +8,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { Routes, Route, Link } from "react-router-dom";
 import AllGames from './pages/AllGames/AllGames';
 import AddNewGame from './pages/AddNewGame/AddNewGame';
+import DetailsGame from './pages/DetailsGame/DetailsGame';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route  path="/" element={<AllGames />} />
 
         <Route path="/games/add" element={<AddNewGame />} />
+
+        <Route path="/games/:id" element={<DetailsGame />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>      
