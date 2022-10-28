@@ -23,7 +23,7 @@ const DetailsGame = () => {
             setGame(data);
         })
         .catch((err) => console.log(err));
-    }, []); //  <-- This effect will run only once, after the initial render
+    }, [id]); //  <-- This effect will run only once, after the initial render
 
     const deleteGame = () => {
         service.delGame(id)

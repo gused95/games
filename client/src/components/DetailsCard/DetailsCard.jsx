@@ -14,10 +14,6 @@ import Divider from '@mui/material/Divider';
 import  Button  from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import PlaceIcon from '@mui/icons-material/Place';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import CakeIcon from '@mui/icons-material/Cake';
 import CheckIcon from '@mui/icons-material/Check';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
@@ -51,7 +47,7 @@ export default function DetailsCard(props) {
     }
 
   return (
-    <Card sx={{ maxWidth: 1500 }}>
+    <Card sx={{ maxWidth: '95vw', minWidth: '50vw' }}>
       <CardMedia
         component="img"
         height="200"
@@ -124,8 +120,8 @@ export default function DetailsCard(props) {
 
       </CardContent>
       <CardActions>
-        <Button variant='contained' color='secondary'>
-          <Link to={`/myCollection/edit/${_id}`} style={linkStyle}>
+        <Button variant='contained' color='primary'>
+          <Link to={`/games/edit/${_id}`} style={linkStyle}>
             Edit
           </Link>
         </Button>
@@ -134,9 +130,7 @@ export default function DetailsCard(props) {
           onClick={deleteGame}
           color='error'
         >
-          <Link to="/myCollection" style={linkStyle} >
-            Delete
-          </Link>
+            Delete 
         </Button>
       </CardActions>
     </Card>

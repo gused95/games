@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CollectionForm from '../../components/CollectionForm/CollectionForm';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import the service file since we need it to send/get the data to/from the server
 import service from '../../api/service';
 
-const AddNewGame = () => {
+const EditGame = () => {
 
     const [imageUrl, setImageUrl] = useState("")
 
@@ -30,6 +30,22 @@ const AddNewGame = () => {
     
     // Require useNavigate
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    // Retrieve current Game ------------------------------
+    
+    // Run the effect after the initial render to get a list of games from the server
+    useEffect(() => {
+        service.getGame(id)
+        .then((data) => {
+            // console.log("data", data);
+            setForm(data);
+            setImageUrl(data.imageUrl)
+        })
+        .catch((err) => console.log(err));
+    }, [id]); //  <-- This effect will run only once, after the initial render
+
+
 
     function handleInputChange(event) {
         const { name, value } = event.target
@@ -49,32 +65,20 @@ const AddNewGame = () => {
         year,
         consoles,
         developer,
-        imageUrl,}
+        imageUrl}
         
+        console.log(data)
         
         service
-            .createGame(data) 
+            .editGame(data, id) 
                 .then((res) => {
-                    // console.log("added new game: ", res);
 
-                    // Reset the form
-                    setForm({
-                    name: '',
-                    description: '',
-                    active: '',
-                    year: '',
-                    consoles: '',
-                    developer: '',
-                    });
-                    
-                    setImageUrl("")
-
-                    // navigate to AllGames
-                    navigate("/");
-
+                    // navigate to current DetailsGame
+                    navigate(`/games/${id}`);
                 })
+
                 .catch((err) => 
-                console.log("Error while adding the new game: ", err))
+                console.log("Error while editing the game: ", err))
     };
 
     // -----------  handleFormSubmission ------------
@@ -141,16 +145,19 @@ const AddNewGame = () => {
     // -----     options for consoles   -------
 
   return (
-    <CollectionForm 
-      handleFormSubmission={handleFormSubmission}
-      handleInputChange={handleInputChange}
-      handleFileUpload={handleFileUpload}
-      {...form}
-      options1={optionsCollec}
-      options2={options}
-      imageUrl={imageUrl}
-    />
+    <div>
+        EditGame
+         <CollectionForm 
+            handleFormSubmission={handleFormSubmission}
+            handleInputChange={handleInputChange}
+            handleFileUpload={handleFileUpload}
+            {...form}
+            options1={optionsCollec}
+            options2={options}
+            imageUrl={imageUrl}
+        />
+    </div>
   )
 }
 
-export default AddNewGame
+export default EditGame

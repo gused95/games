@@ -30,13 +30,24 @@ router.get("/games/:id", (req, res, next) => {
   });
 
 
-// DELETE "http://localhost:5005/api/games/:id" => Route to delete a specific game
+// DELETE "http://localhost:5005/api/games/:id" => Route to delete a game
 router.delete("/games/:id", (req, res, next) => {
     
     const {id} = req.params;
 
     Game.findByIdAndDelete(id)
       .then(gameFromDB => res.status(200).json(gameFromDB))
+      .catch(err => next(err));
+  });
+
+// PUT "http://localhost:5005/api/games/edit/:id" => Route to edit a game
+router.put("/games/edit/:id", (req, res, next) => {
+    
+    const {id} = req.params;
+    console.log(req.body)
+
+    Game.findByIdAndUpdate(id, req.body, { new:true })
+      .then(gameUpdated => res.status(200).json(gameUpdated))
       .catch(err => next(err));
   });
 

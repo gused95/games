@@ -42,10 +42,17 @@ const delGame = (id) => {
     .catch(errorHandler);
 };
 
+const editGame = (data, id) => {
+  return api.put(`/games/edit/${id}`, data)
+    .then(res => res.data)
+    .catch(errorHandler);
+};
+
 export default {
   getGames,
   uploadImage,
   createGame,
   delGame,
+  editGame,
   getGame
 };
