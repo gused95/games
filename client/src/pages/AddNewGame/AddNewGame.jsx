@@ -10,6 +10,10 @@ const AddNewGame = () => {
 
     const [imageUrl, setImageUrl] = useState("")
 
+    const [errStatus, setErrStatus] = useState(false)
+
+    const [errMsg, setErrMsg] = useState('')
+
     const [form, setForm] = useState({
         name: '',
         description: '',
@@ -28,6 +32,7 @@ const AddNewGame = () => {
         developer, 
     } = form;
     
+    
     // Require useNavigate
     const navigate = useNavigate();
 
@@ -36,11 +41,19 @@ const AddNewGame = () => {
         return setForm({ ...form, [name]: value});
     };
 
+    
+
     // -----------  handleFormSubmission ------------
 
     const handleFormSubmission = (event) => {
         event.preventDefault();
         
+        // Validate description length 
+        if (description.length > 300) {
+            setErrStatus(true)
+            return 
+        }
+
         // Wrapping the data
         const data = {
         name,
@@ -51,11 +64,11 @@ const AddNewGame = () => {
         developer,
         imageUrl,}
         
-        
+
         service
             .createGame(data) 
                 .then((res) => {
-                    // console.log("added new game: ", res);
+                    console.log("added new game: ", res);
 
                     // Reset the form
                     setForm({
@@ -73,8 +86,10 @@ const AddNewGame = () => {
                     navigate("/");
 
                 })
-                .catch((err) => 
-                console.log("Error while adding the new game: ", err))
+                .catch((err) => {
+                    const { errorMessage } = err.response.data
+                    setErrMsg(`Error while adding the new game: ${errorMessage}`)
+                })
     };
 
     // -----------  handleFormSubmission ------------
@@ -101,44 +116,53 @@ const AddNewGame = () => {
     };
 
     // -----     options for developer   -------
-    const optionsCollec = [
+    const optDev = [
     {
-        value: 'Venta',
-        label: 'Vender',
+        value: 'Activision',
+        label: 'Activision',
     },
     {
-        value: 'Intercambio',
-        label: 'Intercambio',
+        value: 'Bungie',
+        label: 'Bungie',
     },
     {
-        value: 'Donación',
-        label: 'Donar',
+        value: 'Naugthy Dog',
+        label: 'Naugthy Dog',
     },
     
     ];
     // -----     options for developer   -------
 
     // -----     options for consoles   -------
-    const options = [
+    const optCons = [
     {
-        value: 1,
-        label: '1 semana',
+        value: 'Playstation',
+        label: 'Playstation',
     },
     {
-        value: 2,
-        label: '2 semanas',
+        value: 'X-BOX',
+        label: 'X-BOX',
     },
     {
-        value: 3,
-        label: '3 semanas',
-    },
-    {
-        value: 4,
-        label: '4 semanas',
+        value: 'Nintendo',
+        label: 'Nintendo',
     },
     
     ];
     // -----     options for consoles   -------
+
+    // -----     options for active   -------
+    const optActive = [
+        {
+            value: true,
+            label: 'Active',
+        },
+        {
+            value: false,
+            label: 'No Active',
+        },
+        ];
+    // -----     options for active   -------
 
   return (
     <CollectionForm 
@@ -146,9 +170,12 @@ const AddNewGame = () => {
       handleInputChange={handleInputChange}
       handleFileUpload={handleFileUpload}
       {...form}
-      options1={optionsCollec}
-      options2={options}
+      optDev={optDev}
+      optCons={optCons}
       imageUrl={imageUrl}
+      errStatus={errStatus}
+      optActive={optActive}
+      errMsg={errMsg}
     />
   )
 }

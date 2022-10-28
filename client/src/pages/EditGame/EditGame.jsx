@@ -10,6 +10,10 @@ const EditGame = () => {
 
     const [imageUrl, setImageUrl] = useState("")
 
+    const [errStatus, setErrStatus] = useState(false)
+
+    const [errMsg, setErrMsg] = useState('')
+
     const [form, setForm] = useState({
         name: '',
         description: '',
@@ -56,6 +60,12 @@ const EditGame = () => {
 
     const handleFormSubmission = (event) => {
         event.preventDefault();
+
+        // Validate description length 
+        if (description.length > 300) {
+            setErrStatus(true)
+            return 
+        }
         
         // Wrapping the data
         const data = {
@@ -67,11 +77,12 @@ const EditGame = () => {
         developer,
         imageUrl}
         
-        console.log(data)
+        
         
         service
             .editGame(data, id) 
                 .then((res) => {
+                    
 
                     // navigate to current DetailsGame
                     navigate(`/games/${id}`);
@@ -105,44 +116,53 @@ const EditGame = () => {
     };
 
     // -----     options for developer   -------
-    const optionsCollec = [
-    {
-        value: 'Venta',
-        label: 'Vender',
-    },
-    {
-        value: 'Intercambio',
-        label: 'Intercambio',
-    },
-    {
-        value: 'Donación',
-        label: 'Donar',
-    },
+    const optDev = [
+        {
+            value: 'Activision',
+            label: 'Activision',
+        },
+        {
+            value: 'Bungie',
+            label: 'Bungie',
+        },
+        {
+            value: 'Naugthy Dog',
+            label: 'Naugthy Dog',
+        },
+        
+        ];
+        // -----     options for developer   -------
     
-    ];
-    // -----     options for developer   -------
-
-    // -----     options for consoles   -------
-    const options = [
-    {
-        value: 1,
-        label: '1 semana',
-    },
-    {
-        value: 2,
-        label: '2 semanas',
-    },
-    {
-        value: 3,
-        label: '3 semanas',
-    },
-    {
-        value: 4,
-        label: '4 semanas',
-    },
+        // -----     options for consoles   -------
+        const optCons = [
+        {
+            value: 'Playstation',
+            label: 'Playstation',
+        },
+        {
+            value: 'X-BOX',
+            label: 'X-BOX',
+        },
+        {
+            value: 'Nintendo',
+            label: 'Nintendo',
+        },
+        
+        ];
+        // -----     options for consoles   -------
     
-    ];
-    // -----     options for consoles   -------
+        // -----     options for active   -------
+        const optActive = [
+            {
+                value: true,
+                label: 'Active',
+            },
+            {
+                value: false,
+                label: 'No Active',
+            },
+            ];
+        // -----     options for active   -------
 
   return (
     <div>
@@ -152,9 +172,12 @@ const EditGame = () => {
             handleInputChange={handleInputChange}
             handleFileUpload={handleFileUpload}
             {...form}
-            options1={optionsCollec}
-            options2={options}
+            optDev={optDev}
+            optCons={optCons}
             imageUrl={imageUrl}
+            errStatus={errStatus}
+            optActive={optActive}
+            errMsg={errMsg}
         />
     </div>
   )

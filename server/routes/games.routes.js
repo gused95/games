@@ -44,7 +44,6 @@ router.delete("/games/:id", (req, res, next) => {
 router.put("/games/edit/:id", (req, res, next) => {
     
     const {id} = req.params;
-    console.log(req.body)
 
     Game.findByIdAndUpdate(id, req.body, { new:true })
       .then(gameUpdated => res.status(200).json(gameUpdated))

@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import React from 'react'
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -19,9 +19,12 @@ const CollectionForm = (props) => {
         handleFormSubmission,
         handleInputChange,
         handleFileUpload,
-        options1,
-        options2,
+        optDev,
+        optCons,
         imageUrl,
+        optActive,
+        errMsg,
+        errStatus
       } = props;    
     
     
@@ -124,39 +127,7 @@ const CollectionForm = (props) => {
               </Grid>
 
 
-              <Grid 
-                item 
-                container 
-                xs={11} 
-                component={Paper} 
-                elevation={5} 
-                sx={{ m: 1, padding: 1 }}
-                justifyContent='center'
-                alignContent='center'
-                rowSpacing={2}
-              >
-                <Grid item xs={12}>
-                  <TextField
-                    id="select-developer"
-                    select
-                    label="Select a developer"
-                    type='text'
-                    name='developer'
-                    value={developer}
-                    onChange={handleInputChange}
-                    helperText="¿Dónde quieres agregar este objeto?"
-                    fullWidth
-                    color='secondary'
-                    variant='filled'
-                  >
-                    {options1.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-              </Grid>
+              
 
               <Grid 
                 item 
@@ -182,6 +153,7 @@ const CollectionForm = (props) => {
                       variant="filled"
                       fullWidth
                       autoFocus
+                      required
                     />
                   </Grid>
                   
@@ -198,9 +170,46 @@ const CollectionForm = (props) => {
                       variant="filled"
                       fullWidth
                       placeholder='For instance: shooter game'
+                      required
+                      error={errStatus}
+                      helperText="Description only accept 300 characters"
                     />
                   </Grid>
                     
+              </Grid>
+              
+              <Grid 
+                item 
+                container 
+                xs={11} 
+                component={Paper} 
+                elevation={5} 
+                sx={{ m: 1, padding: 1 }}
+                justifyContent='center'
+                alignContent='center'
+                rowSpacing={2}
+              >
+                <Grid item xs={12}>
+                  <TextField
+                    id="select-developer"
+                    select
+                    label="Select a developer"
+                    type='text'
+                    name='developer'
+                    value={developer}
+                    onChange={handleInputChange}
+                    fullWidth
+                    color='secondary'
+                    variant='filled'
+                    required
+                  >
+                    {optDev.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
               </Grid>
 
               
@@ -226,34 +235,46 @@ const CollectionForm = (props) => {
                     onChange={handleInputChange}
                     variant="filled"
                     fullWidth
+                    required
+                    helperText='Enter a number'
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    id="active"
-                    label="Indicate if it is currently active"
-                    type='boolean'
+                    id="outlined-select-active"
+                    select
+                    label="Select the game status"
+                    type='text'
                     name='active'
                     value={active}
                     onChange={handleInputChange}
                     variant="filled"
                     fullWidth
                     placeholder='Select'
-                  />
+                    required
+                  >
+                    {optActive.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                  </TextField>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     id="outlined-select-consoles"
                     select
-                    label="Select an option"
+                    label="Select console"
                     type='text'
                     name='consoles'
                     value={consoles}
                     onChange={handleInputChange}
+                    variant="filled"
                     helperText="Choose the consoles available for this game, like Nintendo switch or XBOX"
                     fullWidth
+                    required
                   >
-                    {options2.map((option) => (
+                    {optCons.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}
                       </MenuItem>
@@ -262,6 +283,27 @@ const CollectionForm = (props) => {
                 </Grid>
 
               </Grid>
+              {errMsg && (
+                <>
+                <Grid 
+                item 
+                container 
+                xs={11} 
+                component={Paper} 
+                elevation={5} 
+                sx={{ m: 1, padding: 1 }}
+                justifyContent='center'
+                alignContent='center'
+                rowSpacing={2}
+                >
+                  <Grid item xs={12}>
+                    <Typography variant="body1" color="error">
+                      {errMsg}
+                    </Typography>
+                  </Grid>
+                </Grid>
+                </>
+              )}
 
             <Button 
               type="submit"
