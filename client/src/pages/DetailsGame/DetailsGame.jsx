@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import DetailsCard from '../../components/DetailsCard/DetailsCard';
 import service from '../../api/service';
 import Typography from '@mui/material/Typography'
+import { Grid } from '@mui/material';
 
 
 const DetailsGame = () => {
@@ -30,31 +31,31 @@ const DetailsGame = () => {
         .then(() => {
             // Once the delete request is resolved successfully
             // navigate back to the list of Games.
-            navigate("/");
+            navigate("/games");
           })
         .catch((err) => console.log(err));
     }
 
   return (
-    <Box 
-        component="div" 
-        sx={{
-          my: 1,
-          mx: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="h3" color="initial" gutterBottom>
-            Details
-        </Typography>
+    <Box
+    component="div" 
+    sx={{
+      my: 1,
+      mx: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',      
+    }}
+    >
         {game && (
             <>
-                <DetailsCard 
-                    {...game}
-                    deleteGame={deleteGame}
-                />          
+                
+                  <DetailsCard 
+                      {...game}
+                      deleteGame={deleteGame}
+                  />            
+                
+                
             </>
         )}
     </Box>

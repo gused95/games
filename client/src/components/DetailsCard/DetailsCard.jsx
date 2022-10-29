@@ -47,19 +47,14 @@ export default function DetailsCard(props) {
     }
 
   return (
-    <Card sx={{ maxWidth: '95vw', minWidth: '50vw' }}>
+    <Card sx={{ maxWidth: 500  }}>
       <CardMedia
         component="img"
         height="200"
         image={imageUrl}
         alt="game image"
       />
-      <CardContent
-        sx={{ 
-          maxHeight: '100vh',
-          
-        }}
-      >
+      <CardContent>
 
         <Typography gutterBottom variant="h5" component="div">
           {name}
@@ -73,13 +68,7 @@ export default function DetailsCard(props) {
         {description}
         </Typography>
         
-        <List
-          sx={{
-            width: '100%',
-            maxWidth: 500,
-            bgcolor: 'background.paper',
-          }}
-        >
+        <List>
           <ListItem>
             <ListItemAvatar>
               <Avatar sx={{ bgcolor: 'red' }} >
@@ -119,7 +108,7 @@ export default function DetailsCard(props) {
         </List>
 
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ display:'flex', justifyContent: 'center' }}>
         <Button variant='contained' color='primary'>
           <Link to={`/games/edit/${_id}`} style={linkStyle}>
             Edit

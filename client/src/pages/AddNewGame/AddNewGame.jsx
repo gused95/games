@@ -63,12 +63,12 @@ const AddNewGame = () => {
         consoles,
         developer,
         imageUrl,}
-        
+        console.log(data)
 
         service
             .createGame(data) 
                 .then((res) => {
-                    console.log("added new game: ", res);
+                    // console.log("added new game: ", res);
 
                     // Reset the form
                     setForm({
@@ -83,7 +83,7 @@ const AddNewGame = () => {
                     setImageUrl("")
 
                     // navigate to AllGames
-                    navigate("/");
+                    navigate("/games");
 
                 })
                 .catch((err) => {

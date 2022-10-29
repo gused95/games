@@ -2,7 +2,6 @@ import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 
 import HomePage from "./pages/HomePage/HomePage";
-import AboutPage from "./pages/AboutPage/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 import { Routes, Route, Link } from "react-router-dom";
@@ -17,7 +16,9 @@ function App() {
       <Navbar />
       
       <Routes>
-        <Route  path="/" element={<AllGames />} />
+        <Route  path="/" element={<HomePage />} />
+        
+        <Route  path="/games" element={<AllGames />} />
 
         <Route path="/games/add" element={<AddNewGame />} />
 

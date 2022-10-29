@@ -5,12 +5,10 @@ const gameSchema = new Schema(
       name: {
         type: String,
         required: true,
-        // unique: true -> Ideally, should be unique, but its up to you
       },
       description: {
-        type: String,
+        type: String, //TODO: maxlength
         required: true,
-        maxlength: 300,
       },
       
       developer: {
@@ -23,8 +21,11 @@ const gameSchema = new Schema(
       },
       consoles: {
         type: String,
-        required: true,
+        required: true
       },
+      
+      // [{ type: Schema.Types.ObjectId, ref: "Console" }],
+
       imageUrl: {
         type: String,
         required: true,

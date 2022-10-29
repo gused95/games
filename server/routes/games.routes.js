@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 // Require Model
 const Game = require('../models/Game.model')
+// const Console = require('../models/Console.model')
 
 // ********* require fileUploader in order to use it *********
 const fileUploader = require("../config/cloudinary.config");
@@ -69,7 +70,7 @@ router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
 
 // POST 'http://localhost:5005/api/games' => for saving a new movie in the database
 router.post("/games", (req,res) => {
-
+console.log(req.body)
     const {
         name,
         description,
@@ -84,8 +85,7 @@ router.post("/games", (req,res) => {
         !developer || 
         !consoles || 
         !imageUrl || 
-        !year || 
-        !active
+        !year
         ) {
         return res
           .status(400)

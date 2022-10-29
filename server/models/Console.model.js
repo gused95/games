@@ -4,8 +4,9 @@ const consoleSchema = new Schema(
     {
       name: {
         type: String,
-        // unique: true -> Ideally, should be unique, but its up to you
+        enum: ['Activision', 'Bungie', 'Naughty Dog']
       },
+      game: { type: Schema.Types.ObjectId, ref: "Game" }
     },
     {
       // this second object adds extra properties: `createdAt` and `updatedAt`
