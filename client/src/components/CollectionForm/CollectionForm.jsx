@@ -1,11 +1,11 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import React from 'react'
-import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
-import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { green } from '@mui/material/colors';
+import MyInput from '../MyInput/MyInput';
+
 
 const CollectionForm = (props) => {
 
@@ -27,7 +27,68 @@ const CollectionForm = (props) => {
         errStatus
       } = props;    
     
-    
+      
+      const nameField = {
+        idName: 'name',
+        label: 'Name',
+        type: 'text',
+        value: name,
+        onChange: handleInputChange,
+        helperText: ''
+      };
+
+      const descriptField = {
+        idName: 'description',
+        label: 'Description',
+        value: description,
+        onChange: handleInputChange,
+        maxRows: 4,
+        placeholder: 'For instance: shooter game',
+        error: errStatus,
+        helperText: 'Description only accept 300 characters'
+      }
+
+      const yearField = {
+        idName: 'year',
+        label: 'Indicate the year of creation',
+        type: 'number',
+        value: year,
+        onChange: handleInputChange,
+        helperText: 'Enter a number'
+      };
+
+      const devField = {
+        idName: 'developer',
+        label: 'Select a developer',
+        type: 'text',
+        value: developer,
+        onChange: handleInputChange,
+        select: true,
+        optArr: optDev
+      };
+
+      const activeField = {
+        idName: 'active',
+        label: 'Select the game status',
+        type: 'text',
+        value: active,
+        onChange: handleInputChange,
+        select: true,
+        optArr: optActive
+      }
+
+      const consField = {
+        idName: 'consoles',
+        label: 'Select console',
+        type: 'text',
+        value: consoles,
+        onChange: handleInputChange,
+        select: true,
+        optArr: optCons
+      }
+
+
+      
 
   return (
     <Grid 
@@ -143,37 +204,11 @@ const CollectionForm = (props) => {
                 
               >
                   <Grid item xs={12}>
-                    <TextField
-                      id="name"
-                      label="Name"
-                      type='text'
-                      name='name'
-                      value={name}
-                      onChange={handleInputChange}
-                      variant="filled"
-                      fullWidth
-                      autoFocus
-                      required
-                    />
+                    <MyInput {...nameField} />
                   </Grid>
                   
                   <Grid item xs={12}>
-                    <TextField
-                      id="description"
-                      label="Description"
-                      type='text'
-                      name='description'
-                      value={description}
-                      onChange={handleInputChange}
-                      multiline
-                      maxRows={4}
-                      variant="filled"
-                      fullWidth
-                      placeholder='For instance: shooter game'
-                      required
-                      error={errStatus}
-                      helperText="Description only accept 300 characters"
-                    />
+                    <MyInput {...descriptField} />
                   </Grid>
                     
               </Grid>
@@ -190,25 +225,7 @@ const CollectionForm = (props) => {
                 rowSpacing={2}
               >
                 <Grid item xs={12}>
-                  <TextField
-                    id="select-developer"
-                    select
-                    label="Select a developer"
-                    type='text'
-                    name='developer'
-                    value={developer}
-                    onChange={handleInputChange}
-                    fullWidth
-                    color='secondary'
-                    variant='filled'
-                    required
-                  >
-                    {optDev.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
+                  <MyInput {...devField} />
                 </Grid>
               </Grid>
 
@@ -226,60 +243,13 @@ const CollectionForm = (props) => {
                 rowSpacing={2}
               >
                 <Grid item xs={12}>
-                  <TextField
-                    id="year"
-                    label="Indicate the year of creation"
-                    type='number'
-                    name='year'
-                    value={year}
-                    onChange={handleInputChange}
-                    variant="filled"
-                    fullWidth
-                    required
-                    helperText='Enter a number'
-                  />
+                  <MyInput {...yearField} />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    id="outlined-select-active"
-                    select
-                    label="Select the game status"
-                    type='text'
-                    name='active'
-                    value={active}
-                    onChange={handleInputChange}
-                    variant="filled"
-                    fullWidth
-                    placeholder='Select'
-                    required
-                  >
-                    {optActive.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                  </TextField>
+                  <MyInput {...activeField} />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    id="outlined-select-consoles"
-                    select
-                    label="Select console"
-                    type='text'
-                    name='consoles'
-                    value={consoles}
-                    onChange={handleInputChange}
-                    variant="filled"
-                    helperText="Choose the consoles available for this game, like Nintendo switch or XBOX"
-                    fullWidth
-                    required
-                  >
-                    {optCons.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
+                  <MyInput {...consField} />
                 </Grid>
 
               </Grid>

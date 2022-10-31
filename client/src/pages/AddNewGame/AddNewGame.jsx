@@ -63,7 +63,7 @@ const AddNewGame = () => {
         consoles,
         developer,
         imageUrl,}
-        console.log(data)
+        // console.log(data)
 
         service
             .createGame(data) 
