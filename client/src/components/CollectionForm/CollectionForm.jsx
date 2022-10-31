@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { green } from '@mui/material/colors';
 import MyInput from '../MyInput/MyInput';
+import GridForm from '../GridForm/GridForm';
 
 
 const CollectionForm = (props) => {
@@ -119,25 +120,8 @@ const CollectionForm = (props) => {
           }}
         >
             
-              <Grid 
-                item
-                container 
-                xs={11} 
-                component={Paper} 
-                elevation={5} 
-                sx={{ m: 1, padding: 1 }}
-                
-
-              >
-                <Grid 
-                  item 
-                  xs={12}
-                  
-                  sx={{
-                      my: 1,
-                      mx: 1,
-                    }}
-                >
+              <GridForm>
+                <Grid item xs={12}>
                     {imageUrl ? 
                     (
                     <>
@@ -171,38 +155,12 @@ const CollectionForm = (props) => {
                     
                 </Grid>
                 
-                <Grid 
-                  item 
-                  xs={12}
-                  
-                  sx={{
-                    my: 1,
-                    mx: 1,
-                    display: 'flex',
-                    justifyContent: 'center'
-                  }}
-                >
+                <Grid item xs={12}>
                   <input type="file" onChange={handleFileUpload} />
                 </Grid>
-              
-              </Grid>
+              </GridForm>
 
-
-              
-
-              <Grid 
-                item 
-                container 
-                xs={11} 
-                component={Paper} 
-                elevation={5} 
-                sx={{ m: 1, padding: 1 }}
-                justifyContent='center'
-                alignContent='center'
-                rowSpacing={2}
-
-                
-              >
+              <GridForm>
                   <Grid item xs={12}>
                     <MyInput {...nameField} />
                   </Grid>
@@ -210,38 +168,12 @@ const CollectionForm = (props) => {
                   <Grid item xs={12}>
                     <MyInput {...descriptField} />
                   </Grid>
-                    
-              </Grid>
-              
-              <Grid 
-                item 
-                container 
-                xs={11} 
-                component={Paper} 
-                elevation={5} 
-                sx={{ m: 1, padding: 1 }}
-                justifyContent='center'
-                alignContent='center'
-                rowSpacing={2}
-              >
+              </GridForm>
+
+              <GridForm>
                 <Grid item xs={12}>
                   <MyInput {...devField} />
                 </Grid>
-              </Grid>
-
-              
-
-              <Grid 
-                item 
-                container 
-                xs={11} 
-                component={Paper} 
-                elevation={5} 
-                sx={{ m: 1, padding: 1 }}
-                justifyContent='center'
-                alignContent='center'
-                rowSpacing={2}
-              >
                 <Grid item xs={12}>
                   <MyInput {...yearField} />
                 </Grid>
@@ -251,27 +183,17 @@ const CollectionForm = (props) => {
                 <Grid item xs={12}>
                   <MyInput {...consField} />
                 </Grid>
+              </GridForm>
 
-              </Grid>
               {errMsg && (
                 <>
-                <Grid 
-                item 
-                container 
-                xs={11} 
-                component={Paper} 
-                elevation={5} 
-                sx={{ m: 1, padding: 1 }}
-                justifyContent='center'
-                alignContent='center'
-                rowSpacing={2}
-                >
+                <GridForm>
                   <Grid item xs={12}>
                     <Typography variant="body1" color="error">
                       {errMsg}
                     </Typography>
                   </Grid>
-                </Grid>
+                </GridForm>
                 </>
               )}
 
@@ -285,8 +207,6 @@ const CollectionForm = (props) => {
                     Send
             </Button>
           </Box>
-        
-        
       </Grid>
     </Grid>
   )
